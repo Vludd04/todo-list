@@ -2,17 +2,17 @@ const tasks = [
   {
     id: "1138465078061",
     completed: false,
-    text: "Посмотреть новый урок по JavaScript",
+    text: "First Task",
   },
   {
     id: "1138465078062",
     completed: false,
-    text: "Выполнить тест после урока",
+    text: "Second task",
   },
   {
     id: "1138465078063",
     completed: false,
-    text: "Выполнить ДЗ после урока",
+    text: "Third task",
   },
 ];
 
@@ -47,9 +47,8 @@ const createTaskItem = (taskId, taskText) => {
   taskItemText.innerText = taskText;
 
   const deleteButton = document.createElement("button");
-  deleteButton.className =
-    "task-item__delete-button default-button delete-button";
-  deleteButton.innerText = "Удалить";
+  deleteButton.className = "task-item__delete-button";
+  deleteButton.innerText = "Delete";
 
   taskItemMainContent.append(checkboxForm, taskItemText);
   checkboxForm.append(inputCheckbox, labelCheckbox);
@@ -74,15 +73,14 @@ createTaskForm.addEventListener("submit", (event) => {
   const errorMessageBlockFromDOM = createTaskForm.querySelector(
     ".error-message-block"
   );
+  const input = document.querySelector(".create-task-block__input");
 
   if (!newTaskText) {
-    const errorBlock = createErrorBlock(
-      "Название задачи не должно быть пустым"
-    );
+    const errorBlock = createErrorBlock("Task name must not be empty");
     createTaskForm.append(errorBlock);
   } else if (isTaskExists) {
     const errorBlock = createErrorBlock(
-      "Задача с таким названием уже существует."
+      "A task with the same name already exists"
     );
     createTaskForm.append(errorBlock);
   } else if (newTaskText && !isTaskExists) {
@@ -93,6 +91,7 @@ createTaskForm.addEventListener("submit", (event) => {
     tasks.push(newTask);
     const taskItem = createTaskItem(newTask.id, newTask.text);
     tasksListContainer.append(taskItem);
+    input.value = "";
   }
   if (errorMessageBlockFromDOM) {
     errorMessageBlockFromDOM.remove();
@@ -122,10 +121,10 @@ const createDeleteModal = (text) => {
 
   const cancelButton = document.createElement("button");
   cancelButton.className = "delete-modal__button delete-modal__cancel-button";
-  cancelButton.innerText = "Отмена";
+  cancelButton.innerText = "Cancel";
   const confirmButton = document.createElement("button");
   confirmButton.className = "delete-modal__button delete-modal__confirm-button";
-  confirmButton.innerText = "Удалить";
+  confirmButton.innerText = "Delete";
 
   deleteModal.append(modalTitle, modalButtons);
   modalButtons.append(cancelButton, confirmButton);
@@ -140,7 +139,7 @@ const createDeleteModal = (text) => {
 
 let targetTaskIdToDelete = null;
 const { deleteModal, cancelButton, confirmButton, modalOverlay } =
-  createDeleteModal("Вы действительно хотите удалить эту задачу?");
+  createDeleteModal("Are you sure you want to delete this task?");
 document.body.prepend(modalOverlay);
 cancelButton.addEventListener("click", () => {
   modalOverlay.classList.add("modal-overlay_hidden");

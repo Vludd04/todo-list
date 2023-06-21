@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="index.css" />
-  <title>Работа с DOM</title>
+  <title>Task List</title>
 </head>
 <body>
   <div id="tasks">
@@ -13,22 +13,20 @@
       <form class="create-task-block">
         <input
           name="taskName"
-          class="create-task-block__input default-text-input"
+          class="create-task-block__input"
           type="text"
-          placeholder="Создайте новую задачу"
-          value="Посмотреть урок по JavaScript"
+          placeholder="What do you have planned?"
         >
         <button
           type="submit"
-          class="create-task-block__button default-button"
+          class="create-task-block__button"
         >
-          Создать
+          Add
         </button>
       </form>
       <div class="tasks-list"></div>
     </div>
   </div>
-
   <script src="index.js"></script>
 </body>
 </html>

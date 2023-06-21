@@ -1,13 +1,23 @@
 :root {
     --primary-color: #546792;
     --text-color: #ffffff;
-    --delete-button-background: #FF0000;
     --checkbox-checked-background: #546791;
-    --checkbox-border-color: #000;
     --checkbox-text-color: #fff;
     --default-border-color: #000;
     --error-color: #FF0000;
     --modal-overlay: rgb(84, 103, 145, 0.6);
+    --dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--grey: #6B7280;
+	--pink: #EC4899;
+	--purple: #8B5CF6;
+	--light: #EEE;
+}
+
+* {
+    font-family: "Fira sans", sans-serif;
+    margin: 0;
 }
 
 html {
@@ -17,14 +27,28 @@ html {
 
 body {
     padding: 0;
-    margin: 0;
+    background-color: var(--dark);
+    color: #FFF;
+}
+
+input, button {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+h1 { 
+	font-size: 2.5rem;
+	font-weight: 300;
+	color: var(--grey);
+	margin-bottom: 1rem;
 }
 
 #tasks {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     padding: 20px;
 }
 
@@ -33,97 +57,73 @@ body {
     width: 100%;
 }
 
-.tasks__wrapper_hidden {
-    display: none;
-}
-
-.main-navigation {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--primary-color);
-}
-
-.main-navigation__button-item {
-    position: relative;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    padding: 25px;
-    text-decoration: none;
-    font-size: 2rem;
-    line-height: 2.5rem;
-}
-
-.main-navigation__button-item_selected {
-    box-shadow: inset 0 0 0 4px #fff;
-}
-
 .create-task-block {
     position: relative;
 }
 
 .create-task-block__input {
     border: 2px solid var(--primary-color);
-    border-radius: 5px;
-    color: var(--primary-color);
-  
+    border-radius: 1rem;
+    color: var(--light);
+    background-color: var(--darker);
+    padding: 0.5rem;
     font-size: 2rem;
-    line-height: 2.5rem;
     height: 40px;
     width: 50%;
-    padding: 0;
     margin-bottom: 40px;
 }
 
 .create-task-block__button {
-    height: 44px;
+    cursor: pointer;
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    padding: 5px 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	transition: 0.4s;
 }
 
-.create-task-block__button,
+.create-task-block__button:hover {
+	opacity: 0.8;
+}
+
+.task-item__delete-button:hover {
+    opacity: 0.8;
+}
+
 .task-item__delete-button {
     cursor: pointer;
-
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    border: none;
-    padding: 5px 20px;
-    border-radius: 5px;
-  
-    font-size: 1.5rem;
-    line-height: 2.5rem;
+	margin: 0 0.5rem;
+	font-size: 2rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	transition: 0.4s;
+    color: crimson;
 }
 
 .task-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--darkest);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
     width: 100%;
     font-size: 1.5rem;
     line-height: 2.5rem;
-    border-bottom: 2px solid var(--primary-color);
-    padding: 10px 0;
-
-    display: flex;
     flex-direction: column;
 }
 
 .task-item__main-container {
     display: flex;
-    align-items: center;
     justify-content: space-between;
 }
 
 .task-item__main-content {
     display: flex;
     align-items: center;
-}
-
-.task-item__delete-button {
-    transition: 0.2s ease;
-}
-
-.task-item__delete-button {
-    position: relative;
-}
-
-.task-item__delete-button:hover {
-    background-color: var(--delete-button-background);
 }
 
 .task-item__text {
@@ -144,7 +144,7 @@ body {
   
 .checkbox-form__checkbox + label:before {
     content: "\2714";
-    border: 0.1em solid var(--checkbox-border-color);
+    border: 0.1em solid var(--light);
     border-radius: 0.2em;
     display: inline-block;
     width: 1em;
@@ -195,7 +195,7 @@ body {
     position: absolute;
     left: 0;
     bottom: 0;
-
+    margin-bottom: 5px;
     font-size: 1.5rem;
     line-height: 2rem;
     color: var(--error-color);
@@ -209,11 +209,9 @@ body {
     bottom: 0;
     width: 100%;
     height: 100%;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     background-color: var(--modal-overlay);
     z-index: 1000;
     transition: 0.2s ease;
@@ -231,7 +229,6 @@ body {
     width: 50%;
     height: fit-content;
     padding: 15px 25px;
-
     border: 2px solid var(--text-color);
     border-radius: 5px;
     background-color: var(--primary-color);
@@ -255,17 +252,13 @@ body {
 
 .delete-modal__button {
     cursor: pointer;
-
     font-size: 2rem;
     line-height: 2.5rem;
-
     border: 1px solid var(--text-color);
     border-radius: 5px;
-
     background: none;
     color: var(--text-color);
     padding: 5px 10px;
-
     transition: 0.3s ease;
 }
 
@@ -274,6 +267,6 @@ body {
 }
 
 .delete-modal__confirm-button {
-    background-color: var(--delete-button-background);
-    border: 1px solid var(--delete-button-background);
+    background-color: crimson;
+    border: 1px solid crimson;
 }
